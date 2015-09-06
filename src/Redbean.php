@@ -3,6 +3,11 @@ namespace plinker\Redbean;
 
 use RedBeanPHP\R;
 
+/**
+ * Redbean class
+ *
+ * Lots to still add!!!
+ */
 class RedBean {
 
     public function __construct(array $config = array(
@@ -12,13 +17,11 @@ class RedBean {
             'freeze' => false,
             'debug' => false,
     )) {
-        $this->config = $config['RedBean'];
+        $this->config = $config;
 
         if (empty($this->config['dsn'])) {
             exit('no datasource');
         }
-
-        require_once('vendor/wightphone/Components/src/RedBean/rb-p533.php');
 
         R::setup(
             $this->config['dsn'],
@@ -73,7 +76,4 @@ class RedBean {
         return R::trash($result);
     }
 
-    public function helloWorld($params = array()) {
-        return 'Hello World!';
-    }
 }
