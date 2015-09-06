@@ -9,7 +9,6 @@ class RedBean {
             'dsn' => 'sqlite:./database.db', // mysql:host=127.0.0.1;dbname=mydatabase
             'username' => '',
             'password' => '',
-            'database' => '',
             'freeze' => false,
             'debug' => false,
     )) {
