@@ -17,7 +17,7 @@
         "email": "plinker@icodes.it"
     },
     "require": {
-        "php": ">=5.4",
+        "php": ">=5.3.4",
         "gabordemooij/redbean": ">=4.2"
     },
     "autoload": {
