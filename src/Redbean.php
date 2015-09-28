@@ -23,14 +23,18 @@ class RedBean {
             exit('no datasource');
         }
 
-        R::setup(
-            $this->config['dsn'],
-            $this->config['username'],
-            $this->config['password']
-        );
+        try{
+            R::setup(
+                $this->config['dsn'],
+                $this->config['username'],
+                $this->config['password']
+            );
 
-        R::freeze(($this->config['freeze'] === true));
-        R::debug(($this->config['debug'] === true));
+            R::freeze(($this->config['freeze'] === true));
+            R::debug(($this->config['debug'] === true));
+        } catch (\RedBeanPHP\RedException $e){
+
+        }
     }
 
     public function inspect($params = array()) {
