@@ -1,10 +1,10 @@
 <?php
-namespace plinker\Redbean {
+namespace Plinker\Redbean {
 
     use RedBeanPHP\R;
 
     /**
-     * Redbean plinker class
+     * Redbean Plinker class
      */
     class RedBean {
 
