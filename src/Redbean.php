@@ -257,7 +257,7 @@ namespace Plinker\Redbean {
         }
 
         /**
-         * Get most recent row
+         * Most recent row
          *
          * json $plink->mostRecentRow(string);
          *
@@ -270,14 +270,29 @@ namespace Plinker\Redbean {
         }
 
         /**
-         * Update bean
-         * json $plink->update(string, string, array);
+         * Update bean by id
+         * json $plink->update(string, id, array);
          *
          * @param array $params
          */
         public function update(array $params = array())
         {
             $result = R::load($params[0], $params[1]);
+            $result->import($params[2]);
+
+            R::store($result);
+            return R::exportAll($result);
+        }
+        
+        /**
+         * Update bean by where query
+         * json $plink->updateWhere(string, string, array);
+         *
+         * @param array $params
+         */
+        public function updateWhere(array $params = array())
+        {
+            $result = R::findOne($params[0], $params[1]);
             $result->import($params[2]);
 
             R::store($result);
@@ -310,10 +325,21 @@ namespace Plinker\Redbean {
         public function save(array $params = array())
         {
             return $this->update($params);
+        }        
+        
+        /**
+         * Save bean by where - alias of updateWhere()
+         * json $plink->saveWhere(string, string, array);
+         *
+         * @param array $params
+         */
+        public function saveWhere(array $params = array())
+        {
+            return $this->updateWhere($params);
         }
 
         /**
-         * Delete bean
+         * Delete bean by id
          *
          * json $plink->delete(string, int);
          *
@@ -322,6 +348,19 @@ namespace Plinker\Redbean {
         public function delete(array $params = array())
         {
             $result = R::load($params[0], $params[1]);
+            return R::trash($result);
+        }
+        
+        /**
+         * Delete bean by where query
+         *
+         * json $plink->delete(string, string);
+         *
+         * @param array $params
+         */
+        public function deleteWhere(array $params = array())
+        {
+            $result = R::findOne($params[0], $params[1]);
             return R::trash($result);
         }
 
