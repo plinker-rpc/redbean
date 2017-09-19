@@ -6,7 +6,8 @@ namespace Plinker\Redbean {
     /**
      * Redbean Plinker class
      */
-    class RedBean {
+    class RedBean
+    {
 
         /**
          * Construct
@@ -19,7 +20,8 @@ namespace Plinker\Redbean {
             'password' => '',
             'freeze' => false,
             'debug' => false,
-        )) {
+        ))
+        {
             $this->config = $config;
 
             if (empty($this->config['dsn'])) {
@@ -36,7 +38,6 @@ namespace Plinker\Redbean {
                 R::freeze(($this->config['freeze'] === true));
                 R::debug(($this->config['debug'] === true));
             } catch (\RedBeanPHP\RedException $e) {
-
             }
         }
 
@@ -325,7 +326,7 @@ namespace Plinker\Redbean {
         public function save(array $params = array())
         {
             return $this->update($params);
-        }        
+        }
         
         /**
          * Save bean by where - alias of updateWhere()
@@ -363,7 +364,6 @@ namespace Plinker\Redbean {
             $result = R::findOne($params[0], $params[1]);
             return R::trash($result);
         }
-
     }
 
 }
