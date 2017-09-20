@@ -44,9 +44,8 @@ namespace Plinker\Redbean {
         
                 R::freeze(($this->config['freeze'] === true));
                 R::debug(($this->config['debug'] === true));
-
             } catch (\RedBeanPHP\RedException $e) {
-                 exit($e->getMessage());
+                exit($e->getMessage());
             }
         }
 
