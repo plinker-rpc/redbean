@@ -8,7 +8,6 @@ namespace Plinker\Redbean {
      */
     class RedBean
     {
-
         /**
          * Construct
          *
@@ -24,20 +23,30 @@ namespace Plinker\Redbean {
         {
             $this->config = $config;
 
-            if (empty($this->config['dsn'])) {
-                exit('no datasource');
-            }
-
             try {
-                R::setup(
-                    $this->config['dsn'],
-                    $this->config['username'],
-                    $this->config['password']
-                );
-
+                if (!empty($this->config['username'])) {
+                    R::setup(
+                        'mysql:host='.$this->config['host'].';dbname='.$this->config['name'],
+                        $this->config['username'],
+                        $this->config['password']
+                    );
+                } elseif (!empty($this->config['dsn'])) {
+                    R::setup(
+                        $this->config['dsn'],
+                        $this->config['username'],
+                        $this->config['password']
+                    );
+                } else {
+                    R::setup(
+                        'mysql:host='.$this->config['host'].';dbname='.$this->config['name']
+                    );
+                }
+        
                 R::freeze(($this->config['freeze'] === true));
                 R::debug(($this->config['debug'] === true));
+
             } catch (\RedBeanPHP\RedException $e) {
+                 exit($e->getMessage());
             }
         }
 
@@ -365,5 +374,4 @@ namespace Plinker\Redbean {
             return R::trash($result);
         }
     }
-
 }
