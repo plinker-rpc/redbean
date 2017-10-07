@@ -8,6 +8,8 @@ namespace Plinker\Redbean {
      */
     class RedBean
     {
+        public $config = array();
+        
         /**
          * Construct
          *
