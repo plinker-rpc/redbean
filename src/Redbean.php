@@ -17,6 +17,8 @@ namespace Plinker\Redbean {
          */
         public function __construct(array $config = array(
             'dsn' => 'sqlite:./database.db',
+            'host' => '',
+            'name' => '',
             'username' => '',
             'password' => '',
             'freeze' => false,
@@ -24,28 +26,31 @@ namespace Plinker\Redbean {
         ))
         {
             $this->config = $config;
-
+            
+            // connect to redbean
             try {
-                if (!empty($this->config['username'])) {
-                    R::setup(
-                        'mysql:host='.$this->config['host'].';dbname='.$this->config['name'],
-                        $this->config['username'],
-                        $this->config['password']
-                    );
-                } elseif (!empty($this->config['dsn'])) {
-                    R::setup(
-                        $this->config['dsn'],
-                        $this->config['username'],
-                        $this->config['password']
-                    );
-                } else {
-                    R::setup(
-                        'mysql:host='.$this->config['host'].';dbname='.$this->config['name']
-                    );
+                if (!R::testConnection()) {
+                    if (!empty($this->config['host']) && !empty($this->config['name'])) {
+                        R::setup(
+                            'mysql:host='.$this->config['host'].';dbname='.$this->config['name'],
+                            $this->config['username'],
+                            $this->config['password']
+                        );
+                    } elseif (!empty($this->config['dsn'])) {
+                        R::setup(
+                            $this->config['dsn'],
+                            $this->config['username'],
+                            $this->config['password']
+                        );
+                    } else {
+                        R::setup(
+                            'mysql:host='.$this->config['host'].';dbname='.$this->config['name']
+                        );
+                    }
+            
+                    R::freeze(($this->config['freeze'] === true));
+                    R::debug(($this->config['debug'] === true));
                 }
-        
-                R::freeze(($this->config['freeze'] === true));
-                R::debug(($this->config['debug'] === true));
             } catch (\RedBeanPHP\RedException $e) {
                 exit($e->getMessage());
             }
