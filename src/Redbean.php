@@ -85,7 +85,7 @@ namespace Plinker\Redbean {
             $result->import($params[1]);
             R::store($result);
 
-            return R::exportAll($result);
+            return $result;
         }
 
         /**
@@ -118,7 +118,7 @@ namespace Plinker\Redbean {
                 $result = R::findAll($params[0]);
             }
 
-            return R::exportAll($result);
+            return $result;
         }
 
         /**
@@ -241,7 +241,7 @@ namespace Plinker\Redbean {
                 $result = R::findOne($params[0]);
             }
 
-            return R::exportAll($result);
+            return $result;
         }
 
         /**
@@ -254,8 +254,7 @@ namespace Plinker\Redbean {
          */
         public function findLike(array $params = array())
         {
-            $result = R::findLike($params[0], $params[1], $params[2]);
-            return R::exportAll($result);
+            return R::findLike($params[0], $params[1], $params[2]);
         }
 
         /**
@@ -268,8 +267,7 @@ namespace Plinker\Redbean {
          */
         public function findOrCreate(array $params = array())
         {
-            $result = R::findOrCreate($params[0], $params[1]);
-            return R::exportAll($result);
+            return R::findOrCreate($params[0], $params[1]);
         }
 
         /**
@@ -281,8 +279,7 @@ namespace Plinker\Redbean {
          */
         public function mostRecentRow(array $params = array())
         {
-            $result = R::findOne($params[0], ' ORDER BY id DESC LIMIT 1 ');
-            return R::exportAll($result);
+            return R::findOne($params[0], ' ORDER BY id DESC LIMIT 1 ');
         }
 
         /**
@@ -297,7 +294,7 @@ namespace Plinker\Redbean {
             $result->import($params[2]);
 
             R::store($result);
-            return R::exportAll($result);
+            return $result;
         }
         
         /**
@@ -312,7 +309,7 @@ namespace Plinker\Redbean {
             $result->import($params[2]);
 
             R::store($result);
-            return R::exportAll($result);
+            return $result;
         }
 
         /**
@@ -342,7 +339,7 @@ namespace Plinker\Redbean {
         {
             return $this->update($params);
         }
-        
+
         /**
          * Save bean by where - alias of updateWhere()
          * json $plink->saveWhere(string, string, array);
@@ -378,6 +375,26 @@ namespace Plinker\Redbean {
         {
             $result = R::findOne($params[0], $params[1]);
             return R::trash($result);
+        }
+        
+        /**
+         * Store bean - alias of update()
+         * json $plink->store(object);
+         *
+         * @param array $params
+         */
+        public function store($bean)
+        {
+            return R::store($bean);
+        }
+        
+        /**
+         * Export
+         * Exports bean into an array
+         */
+        public function export(\RedBeanPHP\OODBBean $row)
+        {
+            return R::exportAll($row);
         }
     }
 }
