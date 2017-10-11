@@ -378,7 +378,7 @@ namespace Plinker\Redbean {
         }
         
         /**
-         * Store bean - alias of update()
+         * Store bean
          * json $plink->store(object);
          *
          * @param array $params
@@ -386,6 +386,17 @@ namespace Plinker\Redbean {
         public function store($bean)
         {
             return R::store($bean);
+        }
+                
+        /**
+         * Trash bean
+         * json $plink->trash(object);
+         *
+         * @param array $params
+         */
+        public function trash($bean)
+        {
+            return R::trash($bean);
         }
         
         /**
