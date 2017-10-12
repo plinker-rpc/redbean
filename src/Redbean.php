@@ -320,7 +320,9 @@ namespace Plinker\Redbean {
          */
         public function count(array $params = array())
         {
-            if (!empty($params[1])) {
+            if (!empty($params[1]) && !empty($params[2])) {
+                $result = R::count($params[0], $params[1], $params[2]);
+            } elseif (!empty($params[1]) && empty($params[2])) {
                 $result = R::count($params[0], $params[1]);
             } else {
                 $result = R::count($params[0]);
