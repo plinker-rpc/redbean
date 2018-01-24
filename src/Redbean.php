@@ -16,7 +16,7 @@ namespace Plinker\Redbean {
          * @param array $config
          */
         public function __construct(array $config = array(
-            'dsn' => 'sqlite:./database.db',
+            'dsn' => 'sqlite:./.plinker/database.db',
             'host' => '',
             'name' => '',
             'username' => '',
